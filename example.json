@@ -1,0 +1,33 @@
+{
+  "instance_name": "example",
+  "lock_file": "/var/run/odr-audioenc-example.lock",
+  "state_file": "/var/lib/odr-audioenc-wrapper/example.state",
+  "stream_url": "https://broadcast.exampleradio.cz/dab",
+  "fallback_stream_url": "https://stream.exampleradio.cz/dab",
+  "audioenc_command": "exec /opt/dab/bin/odr-audioenc -g -9 -G https://broadcast.exampleradio/dab -b 72 -r 48000 -o tcp://127.0.0.1:9006 -l -V -p 16 -P example.fifo --silence=20",
+  "fallback_audioenc_command": "exec /opt/dab/bin/odr-audioenc -g -9 -G https://stream.exampleradio/dab -b 72 -r 48000 -o tcp://127.0.0.1:9006 -l -V -p 16 -P example.fifo --silence=20",
+  "check_interval_sec": 10,
+  "connect_timeout_sec": 8,
+  "transfer_timeout_sec": 12,
+  "min_bytes": 2048,
+
+  "fail_threshold": 2,
+  "ok_threshold": 2,
+
+  "restart_backoff_sec": 2,
+  "restart_limit_count": 6,
+  "restart_limit_window_sec": 300,
+  "restart_cooldown_sec": 120,
+
+  "notify_on_audioenc_crash": false,
+
+  "owner_name": "example Radio",
+
+  "mail_from": "notify@dabmux",
+  "mail_to": "radio@owner.tld",
+  "msmtp_command": "/usr/bin/msmtp --read-envelope-from -t",
+
+  "email_header": "Hello, $owner_name,\n\nwe detected problem with your stream",
+  "email_footer": "\n\nRegards,\nTeam DAB"
+}
+
