@@ -900,6 +900,7 @@ int main(int argc, char** argv) {
                     restart_times.clear();
                     persisted_state = "RUNNING_PRIMARY";
                     save_state_file(cfg.state_file, persisted_state);
+                    continue;
                 }
 
                 if (child_pid < 0) {
