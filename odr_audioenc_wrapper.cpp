@@ -304,6 +304,9 @@ static ProbeResult probe_stream_url(const Config& cfg, const string& url) {
     curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, cfg.connect_timeout_sec);
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, cfg.transfer_timeout_sec);
     curl_easy_setopt(curl, CURLOPT_USERAGENT, "odr-audioenc-wrapper-msmtp/1.1");
+#if LIBCURL_VERSION_NUM >= 0x074200
+    curl_easy_setopt(curl, CURLOPT_HTTP09_ALLOWED, 1L);
+#endif
     curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &ctx);
