@@ -318,8 +318,9 @@ static ProbeResult probe_stream_url(const Config& cfg, const string& url) {
     curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &r.http_code);
     r.bytes = static_cast<long long>(ctx.bytes);
 
+    const bool http_ok = (r.http_code >= 200 && r.http_code < 300) || r.http_code == 0;
     if ((rc == CURLE_OK || rc == CURLE_ABORTED_BY_CALLBACK) &&
-        r.http_code >= 200 && r.http_code < 300 &&
+        http_ok &&
         ctx.bytes >= cfg.min_bytes) {
         r.ok = true;
         r.detail = "HTTP " + to_string(r.http_code) + ", bytes=" + to_string(r.bytes);
